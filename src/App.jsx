@@ -9,7 +9,7 @@ const About = lazy(() => import('./pages/About'));
 
 function App() {
   return (
-    <Router basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -17,7 +17,17 @@ function App() {
           <Route
             path="/about"
             element={
-              <Suspense fallback={<div className="container loading-state"><div className="loading-card"><div className="skeleton-line" /><div className="skeleton-line" /><div className="skeleton-line" /></div></div>}>
+              <Suspense
+                fallback={
+                  <div className="container loading-state">
+                    <div className="loading-card">
+                      <div className="skeleton-line" />
+                      <div className="skeleton-line" />
+                      <div className="skeleton-line" />
+                    </div>
+                  </div>
+                }
+              >
                 <About />
               </Suspense>
             }
@@ -25,8 +35,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
-    </Router>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
